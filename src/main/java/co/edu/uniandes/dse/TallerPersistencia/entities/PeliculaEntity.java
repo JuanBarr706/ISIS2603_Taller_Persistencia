@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import lombok.Data;
+import java.util.List;
 
 
 
@@ -17,13 +18,15 @@ public class PeliculaEntity extends BaseEntity {
     public String titulo;
     public Integer anioLanzamiento;
 
-    @ManyToMany 
-    public ActorEntity actor;
+    @ManyToMany
+    public List<ActorEntity> actores;
 
-    @ManyToOne 
+    @ManyToOne
     public DirectorEntity director;
 
-   
-  
+
+
+
+
 
 }

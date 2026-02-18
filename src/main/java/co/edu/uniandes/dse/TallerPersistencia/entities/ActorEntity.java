@@ -3,6 +3,7 @@ package co.edu.uniandes.dse.TallerPersistencia.entities;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
 import lombok.Data;
+import java.util.List;
 
 
 @Data
@@ -14,7 +15,7 @@ public class ActorEntity extends BaseEntity{
     public String nacionalidad;
 
     @ManyToMany
-    public PeliculaEntity pelicula;
+    public List<PeliculaEntity> peliculas;
 
 
 
