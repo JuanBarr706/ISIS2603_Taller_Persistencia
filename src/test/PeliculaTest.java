@@ -75,7 +75,6 @@ class PeliculaServiceTest {
         verify(peliculaRepository, never()).save(any());
     }
 
-    // prueba explícita para el caso año 1900 solicitado
     @Test
     void crearPelicula_anio1900_lanzaExcepcion() {
         pelicula.setAnioLanzamiento(1900);
