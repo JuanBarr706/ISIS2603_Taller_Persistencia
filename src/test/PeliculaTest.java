@@ -19,7 +19,16 @@ import jakarta.transaction.Transactional;
 @Transactional
 class PeliculaServiceTest {
 
+    // objeto utilizado en las distintas pruebas
+    private PeliculaEntity pelicula;
 
+    // servicio real inyectado por Spring
+    @org.springframework.beans.factory.annotation.Autowired
+    private PeliculaService peliculaService;
+
+    // repositorio simulado que Spring gestiona como mock
+    @org.springframework.boot.test.mock.mockito.MockBean
+    private PeliculaRepository peliculaRepository;
 
     @BeforeEach
     void setUp() {
@@ -61,6 +70,15 @@ class PeliculaServiceTest {
     @Test
     void crearPelicula_anioInvalido_lanzaExcepcion() {
         pelicula.setAnioLanzamiento(1930);
+
+        assertThrows(IllegalOperationException.class, () -> peliculaService.crearPelicula(pelicula));
+        verify(peliculaRepository, never()).save(any());
+    }
+
+    // prueba explícita para el caso año 1900 solicitado
+    @Test
+    void crearPelicula_anio1900_lanzaExcepcion() {
+        pelicula.setAnioLanzamiento(1900);
 
         assertThrows(IllegalOperationException.class, () -> peliculaService.crearPelicula(pelicula));
         verify(peliculaRepository, never()).save(any());
